@@ -1,0 +1,47 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "identifier": "build",
+            "type": "npm",
+            "script": "build",
+            "problemMatcher": [
+                "$tsc"
+            ]
+        },
+        {
+            "identifier": "dev-server",
+            "group": "build",
+            "type": "npm",
+            "script": "dev-server",
+            "isBackground": true,
+            "problemMatcher": {
+                "base": "$tsc",
+                "fileLocation": "absolute",
+                "pattern": [
+                    {
+                        "regexp": "^\\[tsl\\] ([^ ]*) in ([^\\(]*)\\((\\d+),(\\d+)\\)(.*)$",
+                        "severity": 1,
+                        "file": 2,
+                        "line": 3,
+                        "column": 4
+                    },
+                    {
+                        "regexp": "^      TS([^:]+): (.*)$",
+                        "code": 1,
+                        "message": 2
+                    }
+                ],
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": {
+                        "regexp": "^ℹ ｢wdm｣: Compiling\\.\\.\\.$"
+                    },
+                    "endsPattern": {
+                        "regexp": "^(ℹ ｢wdm｣: Compiled successfully\\.|ℹ ｢wdm｣: Failed to compile\\.)$"
+                    }
+                }
+            }
+        }
+    ]
+}
